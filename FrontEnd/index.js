@@ -4,12 +4,13 @@ console.log("Hello world !");
 function addFigures(photos){ //Définition de la fonction addFigures, une fonction permet de condenser du code
     const newFigure = document.createElement("figure");
 
-    const imageFigure = document.createElement("img"); // problème de chargement des images à cause de SAMEORIGIN
+    const imageFigure = document.createElement("img");
     imageFigure.src = photos["imageUrl"];
     imageFigure.alt = photos["title"];
+    imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
     console.log(imageFigure);
 
-    const captionFigure = document.createElement("figcaption");
+    const captionFigure = document.createElement("figcaption"); //création de HTML qui va impacter sur le CSS existant
     captionFigure.innerText = photos["title"];
 
     newFigure.appendChild(imageFigure);//appendChild met à la suite l'élément
@@ -33,7 +34,7 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
     for (let photos of listPictures) {//va parcourir value et va le mettre dans photos et exécutera les lignes mis dans la boucle
 
         websitePictures.appendChild(addFigures(photos)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
-    } //pas sur le même serveur (5500 au lieu de 5678) à cause du truc SAMEORIGIN qui empêche d'afficher sur le même domaine.
+    }
 })
 
 .catch(function(err){
@@ -50,8 +51,8 @@ fetch("http://localhost:5678/api/categories") //ce fetch appelle aux catégories
     }
 })
 
-.then(function(value){
-    console.log(value);
+.then(function(tags){
+    console.log(tags);
 })
 
 .catch(function(err){

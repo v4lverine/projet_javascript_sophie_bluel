@@ -186,3 +186,25 @@ footer nav ul {
 	margin: 2em
 }
 
+#categories {
+	display: flex;
+	justify-content: center;
+}
+
+ #categories li{ /*mes modifs */
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	background-color: white;
+	margin-block : 2em;
+	margin-inline: 0.5em;
+	border-radius: 60px ;
+	border: #1D6154 solid 2px;
+	padding-inline: 2em;
+	padding-block: 0.5em;
+ }
+
+ #categories li:hover{
+	color: white;
+	background-color: #1D6154;
+ }

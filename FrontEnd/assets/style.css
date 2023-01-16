@@ -174,9 +174,16 @@ nav li {
   font-size: 1.2em;
 }
 
-li:hover {
+li:hover,
+#link-login:hover {
   color: #b1663c;
 }
+
+#link-login {
+  text-decoration: none;
+  color: black;
+}
+
 #introduction {
   display: flex;
   align-items: center;

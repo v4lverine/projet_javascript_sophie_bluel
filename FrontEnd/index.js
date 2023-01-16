@@ -20,6 +20,10 @@ function addFigures(photos) {
   return newFigure; //la fonction donne une valeur en réponse, sans ça, la fonction ne renvoit rien
 }
 
+//déclarer des constances ou variables avant, comme ça elles seront disponibles à tout moment
+const elCategories = document.querySelector("#categories");
+const elPhotos = document.querySelector("#photographs");
+
 fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fetch appelle aux travaux dans l'API, utilisation d'une fonction
   .then(function (res) {
     if (res.ok) {
@@ -34,21 +38,19 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
 
     let websiteCategories = document.getElementById("categories");
 
-    const setCategories = new Set(); //set pour les catégories (tags)
+    const setCategories = new Set(); //set pour les catégories (tags)      setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
+    setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
 
     for (let photos of listPictures) {
       //va parcourir listPictures et va le mettre dans photos et exécutera les lignes mises dans la boucle
 
       websitePictures.appendChild(addFigures(photos)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
-
-      setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
       setCategories.add(photos.category.name); //permet de faire un tri des doublons (je crois), on retrouvera que les catégories uniques
     }
 
     for (let category of setCategories) {
       //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
       const newCategory = document.createElement("li");
-
       const newTag = document.createElement("a");
       newTag.innerText = category;
 

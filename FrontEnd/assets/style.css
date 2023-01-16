@@ -294,6 +294,11 @@ footer nav ul {
   background-color: #1d6154;
 }
 
+.hide {
+  /*pour les filtres*/
+  display: none;
+}
+
 /*pour la page de connexion, code à revoir pour épurer*/
 
 .log-in {

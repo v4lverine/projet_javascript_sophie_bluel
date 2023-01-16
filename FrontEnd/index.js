@@ -3,13 +3,13 @@ console.log("Hello world !");
 function addFigures(photos) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
   const newFigure = document.createElement("figure"); //affectera le DOM
-  newFigure.className = photos["category"]["name"]; //le souci, c'est que cela crée 3 classes différentes pour "Hotels & restaurants"
+  newFigure.setAttribute("data-category", photos.category.name);
+  console.log(newFigure);
 
   const imageFigure = document.createElement("img");
   imageFigure.src = photos["imageUrl"]; //enlever les crochets voir ligne 44
   imageFigure.alt = photos["title"];
   imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
-  console.log(imageFigure);
 
   const captionFigure = document.createElement("figcaption"); //création de HTML qui va impacter sur le CSS existant
   captionFigure.innerText = photos["title"];
@@ -19,10 +19,6 @@ function addFigures(photos) {
 
   return newFigure; //la fonction donne une valeur en réponse, sans ça, la fonction ne renvoit rien
 }
-
-//déclarer des constances ou variables avant, comme ça elles seront disponibles à tout moment
-const elCategories = document.querySelector("#categories");
-const elPhotos = document.querySelector("#photographs");
 
 fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fetch appelle aux travaux dans l'API, utilisation d'une fonction
   .then(function (res) {
@@ -57,6 +53,19 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
       newCategory.appendChild(newTag); //il faut maintenant ajouter le filtrage des données des id provenant de l'API
 
       websiteCategories.appendChild(newCategory);
+
+      newCategory.addEventListener("click", () => {
+        document
+          .querySelectorAll("figure[data-category]") //quand on appelle un querySelector ou autre, parle toujours du DOM qui comprend les éléments HTML
+          .forEach((figure) => {
+            const hasNotCategory = !figure.dataset.category.includes(category);
+            figure.className = "";
+
+            if (category !== "Tous" && hasNotCategory) {
+              figure.className = "hide";
+            }
+          });
+      });
     }
   })
   .catch(function (err) {

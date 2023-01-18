@@ -34,7 +34,7 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
 
     let websiteCategories = document.getElementById("categories");
 
-    const setCategories = new Set(); //set pour les catégories (tags)      setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
+    const setCategories = new Set(); //set pour les catégories (tags) = un set permet d'enlever les doublons d'une liste
     setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
 
     for (let photos of listPictures) {
@@ -58,7 +58,7 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
         document
           .querySelectorAll("figure[data-category]") //quand on appelle un querySelector ou autre, parle toujours du DOM qui comprend les éléments HTML
           .forEach((figure) => {
-            const hasNotCategory = !figure.dataset.category.includes(category);
+            const hasNotCategory = !figure.dataset.category.includes(category); //qui ne vaut pas la valeur de category qui est un élément du set "setCategories"
             figure.className = "";
 
             if (category !== "Tous" && hasNotCategory) {

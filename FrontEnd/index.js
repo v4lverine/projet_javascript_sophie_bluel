@@ -7,12 +7,12 @@ function addFigures(photos) {
   console.log(newFigure);
 
   const imageFigure = document.createElement("img");
-  imageFigure.src = photos["imageUrl"]; //enlever les crochets voir ligne 44
-  imageFigure.alt = photos["title"];
+  imageFigure.src = photos.imageUrl; //enlever les crochets voir ligne 44
+  imageFigure.alt = photos.title;
   imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
 
   const captionFigure = document.createElement("figcaption"); //création de HTML qui va impacter sur le CSS existant
-  captionFigure.innerText = photos["title"];
+  captionFigure.innerText = photos.title;
 
   newFigure.appendChild(imageFigure); //appendChild ajoute l'élément à newFigure, met à la suite l'élément
   newFigure.appendChild(captionFigure);

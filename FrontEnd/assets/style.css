@@ -348,3 +348,12 @@ input[type="submit"] {
   font-weight: bold;
   text-align: center;
 }
+
+#authentification-failed {
+  text-align: center;
+  margin-bottom: 5%;
+  color: red;
+  font-weight: bolder;
+  font-size: large;
+  display: none;
+}

@@ -1,5 +1,7 @@
 console.log("Hello world !");
 
+console.log(localStorage.getItem("userConnected"));
+
 function addFigures(photos) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
   const newFigure = document.createElement("figure"); //affectera le DOM

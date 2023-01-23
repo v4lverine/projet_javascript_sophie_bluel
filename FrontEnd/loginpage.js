@@ -1,6 +1,6 @@
 const userConnected = localStorage.getItem("userConnected");
 if (!!userConnected) {
-  window.location.href = "/";
+  window.location.href = "index.html";
 } //test booléen pour savoir s'il ya qqch dans cette valeur
 
 const loginForm = document.forms[0];
@@ -33,7 +33,7 @@ submitButton.addEventListener("click", (evt) => {
     .then(function (res) {
       localStorage.setItem("userConnected", res.token); //met le token dans une boîte afin de le récupérer après, facile à retrouver
 
-      window.location.href = "/"; //renvoit à la page d'accueil, le token apparaît maintenant dans la console de la page index, / renvoit à la racine
+      window.location.href = "index.html"; //renvoit à la page d'accueil, le token apparaît maintenant dans la console de la page index, / renvoit à la racine
     })
     .catch((e) => (failAuthentification.style.display = "block")); //va faire apparaître le message d'erreur sous le formulaire
 });

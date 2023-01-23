@@ -72,10 +72,12 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
 
 const logInHidden = document.getElementsByClassName("linklogin");
 const userConnected = localStorage.getItem("userConnected");
+const modalOptions = document.getElementById("modal-userconnected"); //pour faire apparaître le menu de gestion de la modale
 
 if (userConnected !== null) {
   // quand l'utilisateur est connecté
   logInHidden[0].innerText = "logout";
+  modalOptions.style.display = "flex"; //l'option de la modale apparaît seulement quand l'utilisateur est connecté
 }
 
 logInHidden[0].addEventListener("click", () => {

@@ -360,3 +360,34 @@ input[type="submit"] {
   font-size: large;
   display: none;
 }
+
+/* pour la modale */
+#modal-userconnected {
+  /*la boîte qui apparaît pour ouvrir la modale*/
+  background-color: black;
+  color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  margin: 0;
+}
+
+#changings {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border: 1px solid white;
+  text-decoration: none;
+  border-radius: 25px;
+  margin-inline: 2%;
+  padding: 12px;
+}
+
+#changings:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 25px;
+  padding: 12px;
+}

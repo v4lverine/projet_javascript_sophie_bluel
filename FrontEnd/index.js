@@ -83,3 +83,44 @@ if (userConnected !== null) {
 logInHidden[0].addEventListener("click", () => {
   localStorage.removeItem("userConnected");
 });
+
+//gestion de la modale
+
+let modal = null;
+
+const openModal = function (e) { //déclaration de fonction pour ouvrir la modale
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute("href"));
+  target.style.display = null;
+  target.removeAttribute("aria-hidden");
+  target.setAttribute("aria-modal", "true");
+  modal = target;
+  modal.addEventListener("click", closeModal);
+  modal.querySelector(".close-modal").addEventListener("click", closeModal);
+  modal.querySelector(".modal-stop").addEventListener("click", stopPropagation)
+};
+
+const closeModal = function (e) { //fonction pour fermer la modale
+  if (modal === null) return;
+  e.preventDefault();
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  modal.removeAttribute("aria-modal");
+  modal.removeEventListener("click", closeModal);
+  modal.querySelector(".close-modal").removeEventListener("click", closeModal);
+  modal.querySelector(".modal-stop").removeEventListener("click", stopPropagation);
+  modal = null;
+};
+
+const stopPropagation = function (e) {
+  e.stopPropagation();
+};
+
+const linkToModal = document.getElementById("changings"); //lien qui mène à la modale
+linkToModal.addEventListener("click", openModal);
+
+window.addEventListener("keydown", function (e) { //permettra de fermer la modale avec la touche "Échap"
+  if (e.key === "Escape" || e.key === "Esc") {
+    closeModal(e)
+  }
+}) 

@@ -175,11 +175,11 @@ nav li {
 }
 
 li:hover,
-#link-login:hover {
+.linklogin:hover {
   color: #b1663c;
 }
 
-#link-login {
+.linklogin {
   text-decoration: none;
   color: black;
 }
@@ -300,6 +300,9 @@ footer nav ul {
 }
 
 /*pour la page de connexion, code à revoir pour épurer*/
+#bold-login {
+  font-weight: bold;
+}
 
 .log-in {
   width: 50%;

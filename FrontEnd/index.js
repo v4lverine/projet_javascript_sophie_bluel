@@ -1,7 +1,3 @@
-console.log("Hello world !");
-
-console.log(localStorage.getItem("userConnected"));
-
 function addFigures(photos) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
   const newFigure = document.createElement("figure"); //affectera le DOM
@@ -74,31 +70,14 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
     console.log("J'ai eu une erreur !");
   });
 
-// fetch("http://localhost:5678/api/categories") //ce fetch appelle aux catégories dans l'API
-// .then(function(res){
-//     if (res.ok) {
-//         return res.json();
-//     }
-// })
+const logInHidden = document.getElementsByClassName("linklogin");
+const userConnected = localStorage.getItem("userConnected");
 
-// .then(function(tags){ // récupère le json ici
-//     console.log(tags);
+if (userConnected !== null) {
+  // quand l'utilisateur est connecté
+  logInHidden[0].innerText = "logout";
+}
 
-//     for (let tag of tags){ //va passer sur chaque élément de tags et va les mettre dans tag et va exécuter les lignes entre les accolades pour chacun
-
-//     }
-
-//     for (let category of setCategories){  //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
-//         const newCategory = document.createElement("li");
-
-//         const newTag = document.createElement("a");
-//         newTag.id = category["id"];
-//         newTag.innerText = category["name"];
-
-//         newCategory.appendChild(newTag);
-//     }
-// })
-
-// .catch(function(err){
-//     console.log("J'ai eu une erreur !");
-// });
+logInHidden[0].addEventListener("click", () => {
+  localStorage.removeItem("userConnected");
+});

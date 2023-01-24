@@ -1,8 +1,8 @@
-function addFigures(photos) {
+function addFigures(photos, modalAdds) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
   const newFigure = document.createElement("figure"); //affectera le DOM
   newFigure.setAttribute("data-category", photos.category.name);
-  console.log(newFigure);
+  newFigure.setAttribute("data-id", photos.id);
 
   const imageFigure = document.createElement("img");
   imageFigure.src = photos.imageUrl; //enlever les crochets voir ligne 44
@@ -10,7 +10,10 @@ function addFigures(photos) {
   imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
 
   const captionFigure = document.createElement("figcaption"); //création de HTML qui va impacter sur le CSS existant
-  captionFigure.innerText = photos.title;
+  if (modalAdds == true){
+    captionFigure.innerText = "éditer";
+    newFigure.className = "pictures-adjustments";
+  } else { captionFigure.innerText = photos.title; }
 
   newFigure.appendChild(imageFigure); //appendChild ajoute l'élément à newFigure, met à la suite l'élément
   newFigure.appendChild(captionFigure);
@@ -35,11 +38,14 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
     const setCategories = new Set(); //set pour les catégories (tags) = un set permet d'enlever les doublons d'une liste
     setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
 
+    const modalPictures = document.getElementById("photographs-modal"); //pour ajouter les photos à la modale
+
     for (let photos of listPictures) {
       //va parcourir listPictures et va le mettre dans photos et exécutera les lignes mises dans la boucle
 
-      websitePictures.appendChild(addFigures(photos)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
+      websitePictures.appendChild(addFigures(photos, false)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
       setCategories.add(photos.category.name); //permet de faire un tri des doublons (je crois), on retrouvera que les catégories uniques
+      modalPictures.appendChild(addFigures(photos, true));
     }
 
     for (let category of setCategories) {
@@ -97,7 +103,9 @@ const openModal = function (e) { //déclaration de fonction pour ouvrir la modal
   modal = target;
   modal.addEventListener("click", closeModal);
   modal.querySelector(".close-modal").addEventListener("click", closeModal);
-  modal.querySelector(".modal-stop").addEventListener("click", stopPropagation)
+  modal.querySelector(".close-modal2").addEventListener("click", closeModal);
+  modal.querySelector(".modal-stop").addEventListener("click", stopPropagation);
+  modal.querySelector(".modal-add").addEventListener("click", stopPropagation);
 };
 
 const closeModal = function (e) { //fonction pour fermer la modale
@@ -108,7 +116,9 @@ const closeModal = function (e) { //fonction pour fermer la modale
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
   modal.querySelector(".close-modal").removeEventListener("click", closeModal);
+  modal.querySelector(".close-modal2").removeEventListener("click", closeModal);
   modal.querySelector(".modal-stop").removeEventListener("click", stopPropagation);
+  modal.querySelector(".modal-add").removeEventListener("click", stopPropagation);
   modal = null;
 };
 
@@ -123,4 +133,19 @@ window.addEventListener("keydown", function (e) { //permettra de fermer la modal
   if (e.key === "Escape" || e.key === "Esc") {
     closeModal(e)
   }
-}) 
+});
+
+const buttonToSecondModal = document.getElementById("add-pictures");
+const firstModal = document.getElementById("modal-list-pics");
+const secondModal = document.getElementById("modal-add-pics");
+const buttonBackModal = document.getElementsByClassName("back-modal")[0];
+
+buttonToSecondModal.addEventListener("click", () =>{
+  firstModal.style.display = "none";
+  secondModal.style.display = "flex";
+});
+
+buttonBackModal.addEventListener("click", () => {
+  firstModal.style.display = "flex";
+  secondModal.style.display = "none";
+})

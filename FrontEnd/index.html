@@ -14,23 +14,32 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
+   
     <section id="modal-userconnected">
       <p>Mode édition</p>
       <a id="changings" href="#modal1">publier les changements</a>
     </section>
-    <aside
-      id="modal1"
-      class="modal"
-      aria-hidden="true"
-      role="dialog"
-      aria-labelledby="title-modal"
-      style="display: none"
-    >
-      <div class="modal-wrapper modal-stop">
+   
+    <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" style="display: none">
+      <div id="modal-list-pics" class="modal-wrapper modal-stop">
         <button class="close-modal">&#x2716;</button>
-        <h2 id="title-modal">Galerie photos</h2>
+        <h2 class="title-modal">Galerie photo</h2> <!--première page modale-->
+        <div id="photographs-modal" class="gallery modal-gallery">
+         </div>
+         <hr class="separate-line">
+         <button id="add-pictures">Ajouter une photo</button>
+         <a href="#" class="remove-pictures">Supprimer la galerie</a>
+      </div>
+
+      <div id="modal-add-pics" class="modal-wrapper modal-add" style="display: none;">
+        <div class="button-adjusting">
+          <button class="back-modal">&#129120;</button>
+          <button class="close-modal2">&#x2716;</button>
+        </div>
+        <h2 class="title-modal">Ajout photo</h2> <!--deuxième page modale-->
       </div>
     </aside>
+   
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -75,50 +84,7 @@
           </ul>
         </nav>
         <div id="photographs" class="gallery">
-          <!-- <figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure> -->
+         <!--les figures en JS se trouvent ici-->
         </div>
       </section>
       <section id="contact">

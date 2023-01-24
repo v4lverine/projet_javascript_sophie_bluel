@@ -282,8 +282,7 @@ input[type="submit"] {
 }
 
 /* pour la modale */
-#modal-userconnected {
-  /*la boîte qui apparaît pour ouvrir la modale*/
+#modal-userconnected { /*la boîte qui apparaît pour ouvrir la modale*/
   background-color: black;
   color: white;
   display: none;
@@ -322,6 +321,7 @@ input[type="submit"] {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
+  font-family: 'Syne';
 }
 
 .modal-wrapper {
@@ -331,12 +331,75 @@ input[type="submit"] {
   max-height: calc(100vh - 20px);
   width: 600px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
 }
 
-.close-modal {
+.close-modal, .close-modal2, .back-modal {
   padding: 0;
   border: none;
   background: none;
+  font-size: large;
+  align-self: flex-end; /*pour que l'item se mette à la fin du bloc*/
 }
+
+.close-modal:hover, .close-modal2:hover, .back-modal:hover{
+  font-weight: bolder;
+  color: #b1663c;
+}
+
+.button-adjusting{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-modal{
+  font-family: 'Work Sans';
+  font-weight: 400;
+  color: black;
+  margin-bottom: 30px;
+}
+
+#photographs-modal{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 70%; /*met les photos en rang*/
+  font-family: 'Work Sans';
+}
+
+.pictures-adjustments{ /*pour modifier les images de la modale*/ 
+  width: 76px;
+  height: 102px;
+  margin: 10px -5px; /*top/bot, left/right*/
+  }
+
+.separate-line{
+  width: 70%;
+  margin: 50px 0;
+  color: #B3B3B3;
+}
+
+#add-pictures{
+  font-family: 'Syne';
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  padding: 10px 45px;
+  text-align: center;
+  border-radius: 60px;
+  border: none;
+}
+
+.remove-pictures{
+  text-decoration: none;
+  color: red;
+  margin: 25px;
+}
+
+
 
 

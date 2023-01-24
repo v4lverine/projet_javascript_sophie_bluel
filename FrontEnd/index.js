@@ -148,4 +148,4 @@ buttonToSecondModal.addEventListener("click", () =>{
 buttonBackModal.addEventListener("click", () => {
   firstModal.style.display = "flex";
   secondModal.style.display = "none";
-})
+});

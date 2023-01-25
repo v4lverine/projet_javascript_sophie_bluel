@@ -149,3 +149,20 @@ buttonBackModal.addEventListener("click", () => {
   firstModal.style.display = "flex";
   secondModal.style.display = "none";
 });
+
+//appel à l'API pour récupérer le système de suppression d'images
+// addEventListener("click", => {fetch("http://localhost:5678/api/works/" + {"id"},
+// {
+//     method: "DELETE",
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: null
+// })  .then((res) => {
+//   if (res.ok) {
+//     return res.json();
+//   }
+// })  .catch(function (err) {
+//   console.log("J'ai eu une erreur !");
+// })
+// };

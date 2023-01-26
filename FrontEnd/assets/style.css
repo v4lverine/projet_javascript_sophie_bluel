@@ -378,9 +378,13 @@ input[type="submit"] {
   }
 
 .separate-line{
-  width: 70%;
+  width: 100%;
   margin: 50px 0;
   color: #B3B3B3;
+}
+
+#line-modal1{ /*ligne de la première modale, voir si je peux mettre ça autrement car la width est étrange*/
+  width: 70%;
 }
 
 #add-pictures{

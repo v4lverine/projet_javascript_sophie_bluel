@@ -401,6 +401,8 @@ input[type="submit"] {
 }
 
 .trashbin-icon{
+  background-color: black;
+  border-radius: 2px;
   max-width: 15px; /*taille max de l'image*/
   display: block;
   position: relative; /*pour bouger l'image par rapport à sa position initiale*/

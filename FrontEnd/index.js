@@ -1,3 +1,31 @@
+function trashIconDelete (iconDelete, evt) {  //fonction pour permettre d'effacer les images via les icônes
+  evt.preventDefault();
+  evt.stopPropagation();
+  fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete,
+  {
+      method: "DELETE",
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + userConnected,
+      },
+      body: null
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(function(){
+    const emptyDOM = document.querySelectorAll("figure[data-id=" + iconDelete.dataset.delete + "]");
+    emptyDOM.forEach((figure) => {
+      figure.remove();
+    })
+  })
+  .catch(function (err) {
+    console.log("J'ai eu une erreur !");
+  })
+}
+
 function addFigures(photos, modalAdds) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
   const newFigure = document.createElement("figure"); //affectera le DOM
@@ -14,6 +42,8 @@ function addFigures(photos, modalAdds) {
   const iconDelete = document.createElement("img");
   iconDelete.src = "assets/icons/trash-icon.png";
   iconDelete.className = "trashbin-icon";
+  iconDelete.setAttribute("data-delete", photos.id);
+  iconDelete.addEventListener("click", (evt) => trashIconDelete(iconDelete, evt));
 
   if (modalAdds == true){
     captionFigure.innerText = "éditer";
@@ -27,6 +57,7 @@ function addFigures(photos, modalAdds) {
   return newFigure; //la fonction donne une valeur en réponse, sans ça, la fonction ne renvoit rien
 }
 
+// console.log(localStorage.getItem("userConnected"));
 fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fetch appelle aux travaux dans l'API, utilisation d'une fonction
   .then(function (res) {
     if (res.ok) {
@@ -35,7 +66,6 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
   })
   .then(function (listPictures) {
     //va traiter les données
-    console.log(listPictures);
     let websitePictures = document.getElementById("photographs");
     websitePictures.innerHTML = ""; //vide le div avec les figures
 
@@ -155,20 +185,3 @@ buttonBackModal.addEventListener("click", () => {
   firstModal.style.display = "flex";
   secondModal.style.display = "none";
 });
-
-//appel à l'API pour récupérer le système de suppression d'images
-// addEventListener("click", => {fetch("http://localhost:5678/api/works/" + {"id"},
-// {
-//     method: "DELETE",
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     body: null
-// })  .then((res) => {
-//   if (res.ok) {
-//     return res.json();
-//   }
-// })  .catch(function (err) {
-//   console.log("J'ai eu une erreur !");
-// })
-// };

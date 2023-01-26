@@ -371,7 +371,7 @@ input[type="submit"] {
   font-family: 'Work Sans';
 }
 
-.pictures-adjustments{ /*pour modifier les images de la modale*/ 
+.pictures-adjustments{ /*pour modifier les images de la modale faites avec JS*/ 
   width: 76px;
   height: 102px;
   margin: 10px -5px; /*top/bot, left/right*/
@@ -394,12 +394,19 @@ input[type="submit"] {
   border: none;
 }
 
-.remove-pictures{
+.remove-pictures{ /*options de la modale pour effacer la galerie d'images*/
   text-decoration: none;
   color: red;
   margin: 25px;
 }
 
+.trashbin-icon{
+  max-width: 15px; /*taille max de l'image*/
+  display: block;
+  position: relative; /*pour bouger l'image par rapport à sa position initiale*/
+  left: 60px;
+  top : 17px;
+}
 
 
 

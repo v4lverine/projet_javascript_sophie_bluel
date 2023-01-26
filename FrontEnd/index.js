@@ -10,9 +10,15 @@ function addFigures(photos, modalAdds) {
   imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
 
   const captionFigure = document.createElement("figcaption"); //création de HTML qui va impacter sur le CSS existant
+
+  const iconDelete = document.createElement("img");
+  iconDelete.src = "assets/icons/trash-icon.png";
+  iconDelete.className = "trashbin-icon";
+
   if (modalAdds == true){
     captionFigure.innerText = "éditer";
     newFigure.className = "pictures-adjustments";
+    newFigure.appendChild(iconDelete);
   } else { captionFigure.innerText = photos.title; }
 
   newFigure.appendChild(imageFigure); //appendChild ajoute l'élément à newFigure, met à la suite l'élément

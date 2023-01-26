@@ -167,7 +167,7 @@ const stopPropagation = function (e) {
 const linkToModal = document.getElementById("changings"); //lien qui mène à la modale
 linkToModal.addEventListener("click", openModal);
 
-window.addEventListener("keydown", function (e) { //permettra de fermer la modale avec la touche "Échap"
+window.addEventListener("keydown", function (e) { //permettra de fermer la modale avec la touche "Échap" (facultatif, mais pratique)
   if (e.key === "Escape" || e.key === "Esc") {
     closeModal(e)
   }

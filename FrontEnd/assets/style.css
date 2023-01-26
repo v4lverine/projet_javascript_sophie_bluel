@@ -95,11 +95,11 @@ nav li {
 }
 
 li:hover,
-.linklogin:hover {
+.linklogin:hover, .linkprojects:hover {
   color: #b1663c;
 }
 
-.linklogin {
+.linklogin, .linkprojects {
   text-decoration: none;
   color: black;
 }

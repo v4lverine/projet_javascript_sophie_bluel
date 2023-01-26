@@ -1,28 +1,30 @@
-function trashIconDelete (iconDelete, evt) {  //fonction pour permettre d'effacer les images via les icônes
-  evt.preventDefault();
-  evt.stopPropagation();
-  fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete,
-  {
-      method: "DELETE",
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + userConnected,
-      },
-      body: null
-  })
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then(function(){
-    const emptyDOM = document.querySelectorAll("figure[data-id=" + iconDelete.dataset.delete + "]");
-    emptyDOM.forEach((figure) => {
-      figure.remove();
-    })
-  })
-  .catch(function (err) {
-    console.log("J'ai eu une erreur !");
+function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les images via les icônes
+  // fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete,
+  // {
+  //     method: "DELETE",
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer ' + userConnected,
+  //     },
+  //     body: null
+  // })
+  // .then((res) => {
+  //   if (res.ok == false) {
+  //     throw new Error("échec de suppression");
+  //   }
+  // })
+  // .then(function(){
+  //   const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
+  //   emptyDOM.forEach((figure) => {
+  //     figure.remove();
+  //   })
+  // })
+  // .catch(function (err) {
+  //   console.log("J'ai eu une erreur !");
+  // })
+  const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
+  emptyDOM.forEach((figure) => {
+    figure.remove();
   })
 }
 
@@ -43,7 +45,7 @@ function addFigures(photos, modalAdds) {
   iconDelete.src = "assets/icons/trash-icon.png";
   iconDelete.className = "trashbin-icon";
   iconDelete.setAttribute("data-delete", photos.id);
-  iconDelete.addEventListener("click", (evt) => trashIconDelete(iconDelete, evt));
+  iconDelete.addEventListener("click", () => trashIconDelete(iconDelete));
 
   if (modalAdds == true){
     captionFigure.innerText = "éditer";

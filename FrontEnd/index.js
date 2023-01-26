@@ -1,5 +1,5 @@
 function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les images via les icônes
-  // fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete,
+  // fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete, //va effacer de l'API
   // {
   //     method: "DELETE",
   //     headers: {
@@ -174,8 +174,8 @@ window.addEventListener("keydown", function (e) { //permettra de fermer la modal
 });
 
 const buttonToSecondModal = document.getElementById("add-pictures");
-const firstModal = document.getElementById("modal-list-pics");
-const secondModal = document.getElementById("modal-add-pics");
+const firstModal = document.getElementById("modal-list-pics"); //première page modale dans DOM
+const secondModal = document.getElementById("modal-add-pics"); //deuxième page modale dans DOM
 const buttonBackModal = document.getElementsByClassName("back-modal")[0];
 
 buttonToSecondModal.addEventListener("click", () =>{
@@ -187,3 +187,6 @@ buttonBackModal.addEventListener("click", () => {
   firstModal.style.display = "flex";
   secondModal.style.display = "none";
 });
+
+//récupération de forms pour la deuxième page modale d'ajout d'images
+let formDataModalAdd = new FormData();

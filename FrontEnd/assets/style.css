@@ -242,7 +242,7 @@ footer nav ul {
   flex-direction: column;
 }
 
-.log-in input {
+.log-in input, #form-modal-add input {
   height: 50px;
   font-size: 1.2em;
   border: none;
@@ -410,5 +410,18 @@ input[type="submit"] {
   top : 17px;
 }
 
+#modal-add-pics label{
+  margin-bottom: 5px;
+}
 
+#form-modal-add{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  font-family: "Work Sans";
+}
+
+#form-modal-add input{
+  margin-bottom: 30px;
+}
 

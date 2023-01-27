@@ -10,7 +10,7 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
   // })
   // .then((res) => {
   //   if (res.ok == false) {
-  //     throw new Error("échec de suppression");
+  //     throw new Error("échec de suppression"); //ça recharge la page entière, ce qui ne devrait pas être le cas
   //   }
   // })
   // .then(function(){
@@ -117,11 +117,15 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
 const logInHidden = document.getElementsByClassName("linklogin");
 const userConnected = localStorage.getItem("userConnected");
 const modalOptions = document.getElementById("modal-userconnected"); //pour faire apparaître le menu de gestion de la modale
+const modificationsInPage = document.getElementsByClassName("add-modifications");
 
 if (userConnected !== null) {
   // quand l'utilisateur est connecté
   logInHidden[0].innerText = "logout";
   modalOptions.style.display = "flex"; //l'option de la modale apparaît seulement quand l'utilisateur est connecté
+  for (modifs of modificationsInPage){   // pour que les boutons "modifier" n'apparaissent qu'une fois connecté, use boucle for pour liste
+    modifs.style.display = "flex";
+  }
 }
 
 logInHidden[0].addEventListener("click", () => {

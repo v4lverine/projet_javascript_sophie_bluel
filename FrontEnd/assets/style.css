@@ -108,13 +108,27 @@ li:hover,
   display: flex;
   align-items: center;
 }
+
 #introduction figure {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }
+
 #introduction img {
   display: block;
   margin: auto;
   width: 80%;
+}
+
+#picture-modify{
+  margin-top: 1%;
+  margin-left: 10%;
+}
+
+#picture-modify a{
+  align-self: flex-end;
 }
 
 #introduction article {
@@ -387,7 +401,7 @@ input[type="submit"] {
   width: 70%;
 }
 
-#add-pictures{
+#add-pictures, #button-form-add{
   font-family: 'Syne';
   font-weight: 700;
   color: white;
@@ -428,4 +442,43 @@ input[type="submit"] {
 #form-modal-add input{
   margin-bottom: 30px;
 }
+
+#button-form-add{
+  width: 55%;
+  align-self: center;
+}
+
+#projects-modifications{
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.add-modifications{
+  display: flex;
+  align-items: baseline;
+  margin-left: 5%;
+}
+
+.add-modifications a{
+  text-decoration: none;
+  color: black;
+  margin-inline: 15%;
+}
+
+.add-modifications img{
+  max-width: 20px;
+  width: fit-content;
+  max-height: fit-content;
+}
+
+#presentation-modify{
+  width: min-content;
+  margin-left: 0;
+  margin-bottom: 3%;
+}
+#presentation-modify a {
+  align-self: flex-end;
+}
+
 

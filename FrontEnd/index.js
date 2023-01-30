@@ -193,4 +193,23 @@ buttonBackModal.addEventListener("click", () => {
 });
 
 //récupération de forms pour la deuxième page modale d'ajout d'images
+const formInSecondModal = document.getElementById("form-modal-add");
 let formDataModalAdd = new FormData();
+formDataModalAdd.append("image");
+formDataModalAdd.append("title");
+formDataModalAdd.append("category");
+
+
+// fetch("http://localhost:5678/api/works", {
+//   method: "POST",
+//   body: new FormData()
+//   })
+//   .then((res) => {
+//    if (res.ok) {
+//    return res.json();
+//     }
+// )}
+//   .then(function (res) {
+// })
+//   .catch((e) => ());
+// });

@@ -193,23 +193,28 @@ buttonBackModal.addEventListener("click", () => {
 });
 
 //récupération de forms pour la deuxième page modale d'ajout d'images
-const formInSecondModal = document.getElementById("form-modal-add");
-let formDataModalAdd = new FormData();
-formDataModalAdd.append("image");
-formDataModalAdd.append("title");
-formDataModalAdd.append("category");
-
+// document.getElementById("file-input").addEventListener("change", (e) {
+// let formDataModalAdd = new FormData();
+// const image = e.target.files[0];
+// formDataModalAdd.append("image", 'imageUrl');
+// formDataModalAdd.append("title", 'title');
+// formDataModalAdd.append("category", 'categoryId');
 
 // fetch("http://localhost:5678/api/works", {
 //   method: "POST",
-//   body: new FormData()
+//   body: formDataModalAdd
+//   }
+//   headers: {
+//    'Authorization': 'Bearer ' + userConnected,
 //   })
 //   .then((res) => {
-//    if (res.ok) {
-//    return res.json();
+//      if (res.ok) {
+//        return res.json();
 //     }
 // )}
-//   .then(function (res) {
+//   .then(() { 
 // })
 //   .catch((e) => ());
 // });
+// })
+

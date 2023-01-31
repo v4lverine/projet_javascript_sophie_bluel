@@ -192,8 +192,21 @@ buttonBackModal.addEventListener("click", () => {
   secondModal.style.display = "none";
 });
 
+let previewPictureModal = document.getElementById("picture-block");
+let imageUploadTool = document.getElementById("file-input");
+let imageUploaded = document.getElementById("image-uploaded");
+
+imageUploadTool.onchange = evt => {
+  const [file] = imageUploadTool.files
+  if (file) {
+    imageUploaded.src = URL.createObjectURL(file)
+    previewPictureModal.innerHTML = "";
+    previewPictureModal.appendChild(imageUploaded);
+  }
+}
+
 //récupération de forms pour la deuxième page modale d'ajout d'images
-// document.getElementById("file-input").addEventListener("change", (e) {
+// document.getElementById("file-input").addEventListener("click", (e) {
 // let formDataModalAdd = new FormData();
 // const image = e.target.files[0];
 // formDataModalAdd.append("image", 'imageUrl');

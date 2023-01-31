@@ -1,32 +1,32 @@
 function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les images via les icônes
-  // fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete, //va effacer de l'API
-  // {
-  //     method: "DELETE",
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer ' + userConnected,
-  //     },
-  //     body: null
-  // })
-  // .then((res) => {
-  //   if (res.ok == false) {
-  //     throw new Error("échec de suppression"); //ça recharge la page entière, ce qui ne devrait pas être le cas
-  //   }
-  // })
-  // .then(function(){
-  //   const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
-  //   emptyDOM.forEach((figure) => {
-  //     figure.remove();
-  //   })
-  // })
-  // .catch(function (err) {
-  //   console.log("J'ai eu une erreur !");
-  // })
-  const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
-  emptyDOM.forEach((figure) => {
-    figure.remove();
+  fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete, //va effacer de l'API
+  {
+      method: "DELETE",
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + userConnected,
+      },
+      body: null
   })
-}
+  .then((res) => {
+    if (res.ok == false) {
+      throw new Error("échec de suppression"); //ça recharge la page entière, ce qui ne devrait pas être le cas
+    }
+  })
+  .then(function(){
+    const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
+    emptyDOM.forEach((figure) => {
+      figure.remove();
+    })
+  })
+  .catch(function (err) {
+    console.log("J'ai eu une erreur !");
+  })
+  // const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
+  // emptyDOM.forEach((figure) => {
+  //   figure.remove();
+  }  //)
+// }
 
 function addFigures(photos, modalAdds) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
@@ -45,7 +45,10 @@ function addFigures(photos, modalAdds) {
   iconDelete.src = "assets/icons/trash-icon.png";
   iconDelete.className = "trashbin-icon";
   iconDelete.setAttribute("data-delete", photos.id);
-  iconDelete.addEventListener("click", () => trashIconDelete(iconDelete));
+  iconDelete.addEventListener("click", (evt) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    trashIconDelete(iconDelete)});
 
   if (modalAdds == true){
     captionFigure.innerText = "éditer";
@@ -187,6 +190,7 @@ buttonToSecondModal.addEventListener("click", () =>{
   secondModal.style.display = "flex";
 });
 
+
 buttonBackModal.addEventListener("click", () => {
   firstModal.style.display = "flex";
   secondModal.style.display = "none";
@@ -206,28 +210,43 @@ imageUploadTool.onchange = evt => {
 }
 
 //récupération de forms pour la deuxième page modale d'ajout d'images
-// document.getElementById("file-input").addEventListener("click", (e) {
-// let formDataModalAdd = new FormData();
-// const image = e.target.files[0];
-// formDataModalAdd.append("image", 'imageUrl');
-// formDataModalAdd.append("title", 'title');
-// formDataModalAdd.append("category", 'categoryId');
+modalAddForm = document.forms[0];
+const buttonUploadImg = document.getElementById("button-form-add");
 
-// fetch("http://localhost:5678/api/works", {
-//   method: "POST",
-//   body: formDataModalAdd
-//   }
-//   headers: {
-//    'Authorization': 'Bearer ' + userConnected,
-//   })
-//   .then((res) => {
-//      if (res.ok) {
-//        return res.json();
-//     }
-// )}
-//   .then(() { 
-// })
-//   .catch((e) => ());
-// });
-// })
+buttonUploadImg.addEventListener("click", (evt) => {
+  evt.preventDefault();
+  evt.stopPropagation();
+  let formDataModalAdd = new FormData();
+  formDataModalAdd.append("image", imageUploadTool.files[0]);
+  formDataModalAdd.append("title", modalAddForm.elements.title.value);
+  formDataModalAdd.append("category", modalAddForm.elements.category.value);
+
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    body: formDataModalAdd,
+    headers: {
+    'Authorization': 'Bearer ' + userConnected,
+    }}
+  )
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then((res) => {
+  })
+  .catch((e) => {
+    console.log("Erreur")
+  }
+  )
+})
+
+modalAddForm.addEventListener("change", () => {
+  if (imageUploadTool.files[0] != null && modalAddForm.elements.title.value != "" && modalAddForm.elements.category.value != "0"){
+    buttonUploadImg.style.backgroundColor = "#1d6154";
+    buttonUploadImg.disabled = false;
+  } else {
+    buttonUploadImg.disabled = true;
+  }
+})
 

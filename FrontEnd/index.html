@@ -50,14 +50,14 @@
           <label for="title">Titre</label>
           <input type="text" name="title" />
           <label for="category">Catégorie</label>
-          <input type="text" name="category" />
-          <select name="category" id="select-category" style="display: none;"> <!--à mettre dans flèche-->
+          <select name="category" id="select-category"> <!--à mettre dans flèche-->
+            <option value="0"></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
             <option value="3">Hôtels & restaurants</option>
           </select>
           <hr class="separate-line">
-          <button id="button-form-add">Valider</button>
+          <button id="button-form-add" disabled="disabled">Valider</button>
         </form>
       </div>
     </aside>

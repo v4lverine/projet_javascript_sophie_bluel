@@ -256,7 +256,7 @@ footer nav ul {
   flex-direction: column;
 }
 
-.log-in input, #form-modal-add input {
+.log-in input, #form-modal-add input, #select-category {
   height: 50px;
   font-size: 1.2em;
   border: none;
@@ -315,6 +315,7 @@ input[type="submit"] {
   border-radius: 25px;
   margin-inline: 2%;
   padding: 12px;
+  cursor: pointer;
 }
 
 #changings:hover {
@@ -410,6 +411,7 @@ input[type="submit"] {
   text-align: center;
   border-radius: 60px;
   border: none;
+  cursor: pointer;
 }
 
 .remove-pictures{ /*options de la modale pour effacer la galerie d'images*/
@@ -426,6 +428,7 @@ input[type="submit"] {
   position: relative; /*pour bouger l'image par rapport à sa position initiale*/
   left: 60px;
   top : 17px;
+  cursor: pointer;
 }
 
 #modal-add-pics label{
@@ -441,11 +444,13 @@ input[type="submit"] {
 
 #form-modal-add input{
   margin-bottom: 30px;
+  font-family: "Work Sans";
 }
 
 #button-form-add{
   width: 55%;
   align-self: center;
+  background-color: #A7A7A7;
 }
 
 #projects-modifications{
@@ -521,5 +526,9 @@ input[type="submit"] {
 
 #image-uploaded{
   max-height: 180px;
+}
+
+#select-category{
+  font-family: "Work Sans";
 }
 

@@ -39,14 +39,14 @@
         <h2 class="title-modal">Ajout photo</h2> <!--deuxième page modale-->
         <form id="form-modal-add">
           <div id="picture-block">
-            <img src="./assets/icons/picture-icon.png" alt="Logo photo" id="icon-picture">
+            <img src="./assets/icons/picture-icon.png" alt="Logo photo" id="icon-picture" class="hide-modal">
             <div class="image-upload">
-              <label for="file-input">+ Ajouter photo</label>
-              <input id="file-input" type="file" accept="image/*">
+              <label for="file-input" class="hide-modal">+ Ajouter photo</label>
+              <input id="file-input" type="file" accept="image/*" class="hide-modal">
             </div>
-            <p>jpg, png : 4mo max</p>
+            <p class="hide-modal">jpg, png : 4mo max</p>
+            <img src="#" alt="" id="image-uploaded" style="display: none;"/> <!--image qui se mettra dans le bloc div via le JS-->
           </div>
-          <img src="#" alt="" id="image-uploaded"/> <!--image qui se mettra dans le bloc div via le JS-->
           <label for="title">Titre</label>
           <input type="text" name="title" />
           <label for="category">Catégorie</label>

@@ -1,5 +1,4 @@
 function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les images via les icônes
-  console.log(iconDelete.dataset, userConnected)
   fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete, //va effacer de l'API
   {
       method: "DELETE",
@@ -31,7 +30,7 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
 function addFigures(photos, modalAdds) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
   const newFigure = document.createElement("figure"); //affectera le DOM
-  newFigure.setAttribute("data-category", photos.category.name);
+  newFigure.setAttribute("data-category", photos.categoryId);
   newFigure.setAttribute("data-id", photos.id);
 
   const imageFigure = document.createElement("img");
@@ -63,39 +62,39 @@ function addFigures(photos, modalAdds) {
   return newFigure; //la fonction donne une valeur en réponse, sans ça, la fonction ne renvoit rien
 }
 
+let websitePictures = document.getElementById("photographs");
+const modalPictures = document.getElementById("photographs-modal"); //pour ajouter les photos à la modale
+
 // console.log(localStorage.getItem("userConnected"));
 fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fetch appelle aux travaux dans l'API, utilisation d'une fonction
   .then(function (res) {
-    console.log("coucou", res)
     if (res.ok) {
       return res.json(); //récupère le json ici
     }
   })
   .then(function (listPictures) {
     //va traiter les données
-    let websitePictures = document.getElementById("photographs");
     websitePictures.innerHTML = ""; //vide le div avec les figures
 
     let websiteCategories = document.getElementById("categories");
 
     const setCategories = new Set(); //set pour les catégories (tags) = un set permet d'enlever les doublons d'une liste
-    setCategories.add("Tous"); //ajoute la catégorie de tags "Tous" à mon DOM
-
-    const modalPictures = document.getElementById("photographs-modal"); //pour ajouter les photos à la modale
+    setCategories.add(JSON.stringify({id: 0, name: "Tous"})); //ajoute la catégorie de tags "Tous" à mon DOM
 
     for (let photos of listPictures) {
       //va parcourir listPictures et va le mettre dans photos et exécutera les lignes mises dans la boucle
 
       websitePictures.appendChild(addFigures(photos, false)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
-      setCategories.add(photos.category.name); //permet de faire un tri des doublons (je crois), on retrouvera que les catégories uniques
+      setCategories.add(JSON.stringify({id: photos.categoryId, name: photos.category.name})); //permet de faire un tri des doublons (je crois), on retrouvera que les catégories uniques
       modalPictures.appendChild(addFigures(photos, true));
     }
 
+    console.log(setCategories);
     for (let category of setCategories) {
       //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
       const newCategory = document.createElement("li");
       const newTag = document.createElement("a");
-      newTag.innerText = category;
+      newTag.innerText = JSON.parse(category).name;
 
       newCategory.appendChild(newTag); //il faut maintenant ajouter le filtrage des données des id provenant de l'API
 
@@ -105,10 +104,10 @@ fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fet
         document
           .querySelectorAll("figure[data-category]") //quand on appelle un querySelector ou autre, parle toujours du DOM qui comprend les éléments HTML
           .forEach((figure) => {
-            const hasNotCategory = !figure.dataset.category.includes(category); //qui ne vaut pas la valeur de category qui est un élément du set "setCategories"
+            const hasNotCategory = !figure.dataset.category.includes(JSON.parse(category).id); //qui ne vaut pas la valeur de category qui est un élément du set "setCategories"
             figure.className = "";
 
-            if (category !== "Tous" && hasNotCategory) {
+            if (JSON.parse(category).name !== "Tous" && hasNotCategory) {
               figure.className = "hide";
             }
           });
@@ -198,16 +197,18 @@ buttonBackModal.addEventListener("click", () => {
   secondModal.style.display = "none";
 });
 
-let previewPictureModal = document.getElementById("picture-block");
 let imageUploadTool = document.getElementById("file-input");
 let imageUploaded = document.getElementById("image-uploaded");
+let hideBlockUpload = document.getElementsByClassName("hide-modal");
 
 imageUploadTool.onchange = evt => {
   const [file] = imageUploadTool.files
   if (file) {
-    imageUploaded.src = URL.createObjectURL(file)
-    previewPictureModal.innerHTML = "";
-    previewPictureModal.appendChild(imageUploaded);
+    imageUploaded.src = URL.createObjectURL(file);
+    imageUploaded.style.display = "flex";
+    for (elements of hideBlockUpload){
+      elements.style.display = "none";
+    }
   }
 }
 
@@ -236,11 +237,19 @@ buttonUploadImg.addEventListener("click", (evt) => {
     }
   })
   .then((res) => {
+    alert("L'image est bien chargée")
+    modalAddForm.elements.title.value = "";
+    modalAddForm.elements.category.value = "";
+    imageUploaded.style.display = "none";
+    for (elements of hideBlockUpload){
+      elements.style.display = "block";
+    }
+    websitePictures.appendChild(addFigures(res, false));
+    modalPictures.appendChild(addFigures(res, true));
   })
   .catch((e) => {
     console.log("Erreur")
-  }
-  )
+  })
 })
 
 modalAddForm.addEventListener("change", () => {

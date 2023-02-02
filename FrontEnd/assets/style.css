@@ -415,7 +415,6 @@ input[type="submit"] {
 }
 
 .remove-pictures{ /*options de la modale pour effacer la galerie d'images*/
-  text-decoration: none;
   color: red;
   margin: 25px;
 }

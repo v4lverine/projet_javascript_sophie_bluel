@@ -1,4 +1,5 @@
 function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les images via les icônes
+  console.log(iconDelete.dataset, userConnected)
   fetch("http://localhost:5678/api/works/" + iconDelete.dataset.delete, //va effacer de l'API
   {
       method: "DELETE",
@@ -6,7 +7,6 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + userConnected,
       },
-      body: null
   })
   .then((res) => {
     if (res.ok == false) {
@@ -14,7 +14,7 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
     }
   })
   .then(function(){
-    const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
+    const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']"); //changer nom 
     emptyDOM.forEach((figure) => {
       figure.remove();
     })
@@ -25,8 +25,8 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
   // const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
   // emptyDOM.forEach((figure) => {
   //   figure.remove();
-  }  //)
-// }
+  // })
+}
 
 function addFigures(photos, modalAdds) {
   //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
@@ -48,7 +48,8 @@ function addFigures(photos, modalAdds) {
   iconDelete.addEventListener("click", (evt) => {
     evt.preventDefault();
     evt.stopPropagation();
-    trashIconDelete(iconDelete)});
+    trashIconDelete(iconDelete)
+  });
 
   if (modalAdds == true){
     captionFigure.innerText = "éditer";
@@ -65,6 +66,7 @@ function addFigures(photos, modalAdds) {
 // console.log(localStorage.getItem("userConnected"));
 fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fetch appelle aux travaux dans l'API, utilisation d'une fonction
   .then(function (res) {
+    console.log("coucou", res)
     if (res.ok) {
       return res.json(); //récupère le json ici
     }

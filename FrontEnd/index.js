@@ -242,7 +242,7 @@ buttonUploadImg.addEventListener("click", (evt) => {
     modalAddForm.elements.category.value = "";
     imageUploaded.style.display = "none";
     for (elements of hideBlockUpload){
-      elements.style.display = "block";
+      elements.style.display = "flex";
     }
     websitePictures.appendChild(addFigures(res, false));
     modalPictures.appendChild(addFigures(res, true));

@@ -80,7 +80,6 @@ fetch("http://localhost:5678/api/works") //appelle aux travaux présents dans l'
       modalPictures.appendChild(addFigures(photos, true));
     }
 
-    console.log(setCategories);
     for (let category of setCategories) { //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
       const newCategory = document.createElement("li");
       const newTag = document.createElement("a");

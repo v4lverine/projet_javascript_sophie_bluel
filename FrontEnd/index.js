@@ -9,7 +9,7 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
   })
   .then((res) => {
     if (res.ok == false) {
-      throw new Error("échec de suppression"); //ça recharge la page entière, ce qui ne devrait pas être le cas
+      throw new Error("échec de suppression");
     }
   })
   .then(function(){
@@ -21,24 +21,19 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
   .catch(function (err) {
     console.log("J'ai eu une erreur !");
   })
-  // const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
-  // emptyDOM.forEach((figure) => {
-  //   figure.remove();
-  // })
 }
 
 function addFigures(photos, modalAdds) {
-  //Définition et déclaration de la fonction addFigures, une fonction permet de condenser du code
-  const newFigure = document.createElement("figure"); //affectera le DOM
+  const newFigure = document.createElement("figure"); //créé les figures dans le DOM
   newFigure.setAttribute("data-category", photos.categoryId);
   newFigure.setAttribute("data-id", photos.id);
 
   const imageFigure = document.createElement("img");
-  imageFigure.src = photos.imageUrl; //enlever les crochets voir ligne 44
+  imageFigure.src = photos.imageUrl;
   imageFigure.alt = photos.title;
   imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
 
-  const captionFigure = document.createElement("figcaption"); //création de HTML qui va impacter sur le CSS existant
+  const captionFigure = document.createElement("figcaption"); //création dans HTML qui va impacter sur le CSS existant
 
   const iconDelete = document.createElement("img");
   iconDelete.src = "assets/icons/trash-icon.png";
@@ -56,55 +51,50 @@ function addFigures(photos, modalAdds) {
     newFigure.appendChild(iconDelete);
   } else { captionFigure.innerText = photos.title; }
 
-  newFigure.appendChild(imageFigure); //appendChild ajoute l'élément à newFigure, met à la suite l'élément
+  newFigure.appendChild(imageFigure); //ajout d'un élément à newFigure
   newFigure.appendChild(captionFigure);
 
-  return newFigure; //la fonction donne une valeur en réponse, sans ça, la fonction ne renvoit rien
+  return newFigure; //sans ça, la fonction ne renvoit rien
 }
 
 let websitePictures = document.getElementById("photographs");
 const modalPictures = document.getElementById("photographs-modal"); //pour ajouter les photos à la modale
 
-// console.log(localStorage.getItem("userConnected"));
-fetch("http://localhost:5678/api/works") //fetch = appel à une fonction, ce fetch appelle aux travaux dans l'API, utilisation d'une fonction
+fetch("http://localhost:5678/api/works") //appelle aux travaux présents dans l'API
   .then(function (res) {
     if (res.ok) {
       return res.json(); //récupère le json ici
     }
   })
   .then(function (listPictures) {
-    //va traiter les données
     websitePictures.innerHTML = ""; //vide le div avec les figures
 
     let websiteCategories = document.getElementById("categories");
 
-    const setCategories = new Set(); //set pour les catégories (tags) = un set permet d'enlever les doublons d'une liste
-    setCategories.add(JSON.stringify({id: 0, name: "Tous"})); //ajoute la catégorie de tags "Tous" à mon DOM
+    const setCategories = new Set(); //permet d'enlever les doublons d'une liste
+    setCategories.add(JSON.stringify({id: 0, name: "Tous"})); //ajoute la catégorie de tags "Tous" au DOM
 
     for (let photos of listPictures) {
-      //va parcourir listPictures et va le mettre dans photos et exécutera les lignes mises dans la boucle
-
       websitePictures.appendChild(addFigures(photos, false)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
-      setCategories.add(JSON.stringify({id: photos.categoryId, name: photos.category.name})); //permet de faire un tri des doublons (je crois), on retrouvera que les catégories uniques
+      setCategories.add(JSON.stringify({id: photos.categoryId, name: photos.category.name}));
       modalPictures.appendChild(addFigures(photos, true));
     }
 
     console.log(setCategories);
-    for (let category of setCategories) {
-      //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
+    for (let category of setCategories) { //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
       const newCategory = document.createElement("li");
       const newTag = document.createElement("a");
       newTag.innerText = JSON.parse(category).name;
 
-      newCategory.appendChild(newTag); //il faut maintenant ajouter le filtrage des données des id provenant de l'API
+      newCategory.appendChild(newTag);
 
       websiteCategories.appendChild(newCategory);
 
       newCategory.addEventListener("click", () => {
         document
-          .querySelectorAll("figure[data-category]") //quand on appelle un querySelector ou autre, parle toujours du DOM qui comprend les éléments HTML
+          .querySelectorAll("figure[data-category]")
           .forEach((figure) => {
-            const hasNotCategory = !figure.dataset.category.includes(JSON.parse(category).id); //qui ne vaut pas la valeur de category qui est un élément du set "setCategories"
+            const hasNotCategory = !figure.dataset.category.includes(JSON.parse(category).id); //parse = analyse objets dans JSON
             figure.className = "";
 
             if (JSON.parse(category).name !== "Tous" && hasNotCategory) {
@@ -124,10 +114,9 @@ const modalOptions = document.getElementById("modal-userconnected"); //pour fair
 const modificationsInPage = document.getElementsByClassName("add-modifications");
 
 if (userConnected !== null) {
-  // quand l'utilisateur est connecté
   logInHidden[0].innerText = "logout";
   modalOptions.style.display = "flex"; //l'option de la modale apparaît seulement quand l'utilisateur est connecté
-  for (modifs of modificationsInPage){   // pour que les boutons "modifier" n'apparaissent qu'une fois connecté, use boucle for pour liste
+  for (modifs of modificationsInPage){   // pour que les boutons "modifier" n'apparaissent qu'une fois connecté
     modifs.style.display = "flex";
   }
 }
@@ -175,7 +164,7 @@ const stopPropagation = function (e) {
 const linkToModal = document.getElementById("changings"); //lien qui mène à la modale
 linkToModal.addEventListener("click", openModal);
 
-window.addEventListener("keydown", function (e) { //permettra de fermer la modale avec la touche "Échap" (facultatif, mais pratique)
+window.addEventListener("keydown", function (e) { //permettra de fermer la modale avec la touche "Échap"
   if (e.key === "Escape" || e.key === "Esc") {
     closeModal(e)
   }
@@ -201,7 +190,7 @@ let imageUploadTool = document.getElementById("file-input");
 let imageUploaded = document.getElementById("image-uploaded");
 let hideBlockUpload = document.getElementsByClassName("hide-modal");
 
-imageUploadTool.onchange = evt => {
+imageUploadTool.onchange = evt => { 
   const [file] = imageUploadTool.files
   if (file) {
     imageUploaded.src = URL.createObjectURL(file);
@@ -216,7 +205,7 @@ imageUploadTool.onchange = evt => {
 modalAddForm = document.forms[0];
 const buttonUploadImg = document.getElementById("button-form-add");
 
-buttonUploadImg.addEventListener("click", (evt) => {
+buttonUploadImg.addEventListener("click", (evt) => { //au clic, ajout d'images au backend
   evt.preventDefault();
   evt.stopPropagation();
   let formDataModalAdd = new FormData();
@@ -238,7 +227,7 @@ buttonUploadImg.addEventListener("click", (evt) => {
   })
   .then((res) => {
     alert("L'image est bien chargée")
-    modalAddForm.elements.title.value = "";
+    modalAddForm.elements.title.value = ""; //recharge le bloc d'upload d'images de la modale quand l'image a été envoyée
     modalAddForm.elements.category.value = "";
     imageUploaded.style.display = "none";
     for (elements of hideBlockUpload){
@@ -252,7 +241,7 @@ buttonUploadImg.addEventListener("click", (evt) => {
   })
 })
 
-modalAddForm.addEventListener("change", () => {
+modalAddForm.addEventListener("change", () => { //bouton "Valider" passe au vert quand tout est bien rempli
   if (imageUploadTool.files[0] != null && modalAddForm.elements.title.value != "" && modalAddForm.elements.category.value != "0"){
     buttonUploadImg.style.backgroundColor = "#1d6154";
     buttonUploadImg.disabled = false;

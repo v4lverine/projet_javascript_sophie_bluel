@@ -15,7 +15,7 @@
   </head>
   <body>
    
-    <section id="modal-userconnected">
+    <section id="modal-userconnected"> <!--fenêtre d'édition du site-->
       <p>Mode édition</p>
       <a id="changings" href="#modal1">publier les changements</a>
     </section>
@@ -47,10 +47,10 @@
             <p class="hide-modal">jpg, png : 4mo max</p>
             <img src="#" alt="" id="image-uploaded" style="display: none;"/> <!--image qui se mettra dans le bloc div via le JS-->
           </div>
-          <label for="title">Titre</label>
+          <label for="title">Titre</label> <!--formulaire deuxième modale-->
           <input type="text" name="title" />
           <label for="category">Catégorie</label>
-          <select name="category" id="select-category"> <!--à mettre dans flèche-->
+          <select name="category" id="select-category">
             <option value="0"></option>
             <option value="1">Objets</option>
             <option value="2">Appartements</option>
@@ -106,6 +106,7 @@
           </p>
         </article>
       </section>
+
       <section id="portfolio">
         <div id="projects-modifications">
           <h2>Mes projets</h2>
@@ -116,13 +117,13 @@
         </div>
         <nav id="tags">
           <ul id="categories">
-            <!-- <li><a>Tous</a></li> -->
           </ul>
         </nav>
         <div id="photographs" class="gallery">
-         <!--les figures en JS se trouvent ici-->
+         <!--les figures du JS se trouvent ici-->
         </div>
       </section>
+
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
@@ -146,5 +147,6 @@
       </nav>
     </footer>
   </body>
+
   <script src="index.js"></script>
 </html>

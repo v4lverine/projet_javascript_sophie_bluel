@@ -210,7 +210,6 @@ footer nav ul {
 }
 
 #categories li {
-  /*mes modifs */
   font-family: "Syne";
   font-weight: 700;
   color: #1d6154;
@@ -233,7 +232,7 @@ footer nav ul {
   display: none;
 }
 
-/*pour la page de connexion, code à revoir pour épurer*/
+/*pour la page de connexion*/
 #bold-login {
   font-weight: bold;
 }
@@ -378,7 +377,7 @@ footer nav ul {
 .pictures-adjustments{ /*pour modifier les images de la modale faites avec JS*/ 
   width: 76px;
   height: 102px;
-  margin: 10px -5px; /*top/bot, left/right*/
+  margin: 10px -5px;
   }
 
 .separate-line{
@@ -387,7 +386,7 @@ footer nav ul {
   color: #B3B3B3;
 }
 
-#line-modal1{ /*ligne de la première modale, voir si je peux mettre ça autrement car la width est étrange*/
+#line-modal1{ /*ligne de la première modale*/
   width: 70%;
 }
 
@@ -411,7 +410,7 @@ footer nav ul {
 .trashbin-icon{
   background-color: black;
   border-radius: 2px;
-  max-width: 15px; /*taille max de l'image*/
+  max-width: 15px;
   display: block;
   position: relative; /*pour bouger l'image par rapport à sa position initiale*/
   left: 60px;
@@ -423,7 +422,7 @@ footer nav ul {
   margin-bottom: 5px;
 }
 
-#form-modal-add{
+#form-modal-add{ /*deuxième modale*/
   display: flex;
   flex-direction: column;
   width: 70%;

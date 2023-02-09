@@ -228,7 +228,7 @@ footer nav ul {
   background-color: #1d6154;
 }
 
-.hide {
+.hide, .image-upload input{
   /*pour les filtres*/
   display: none;
 }
@@ -267,17 +267,6 @@ footer nav ul {
   align-items: left;
   text-align: left;
   margin: 2em 0 1em 0;
-}
-
-input[type="submit"] {
-  font-family: "Syne";
-  font-weight: 700;
-  color: white;
-  background-color: #1d6154;
-  margin: 2em auto;
-  width: 180px;
-  text-align: center;
-  border-radius: 60px;
 }
 
 #forgotten-password {
@@ -507,10 +496,6 @@ input[type="submit"] {
   opacity: 30%;
   margin-bottom: 5%;
   padding-top: 7%;
-}
-
-.image-upload input{
-  display: none;
 }
 
 .image-upload label{

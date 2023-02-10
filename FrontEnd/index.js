@@ -13,7 +13,7 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
     }
   })
   .then(function(){
-    const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']"); //changer nom 
+    const emptyDOM = document.querySelectorAll("figure[data-id='" + iconDelete.dataset.delete + "']");
     emptyDOM.forEach((figure) => {
       figure.remove();
     })
@@ -23,7 +23,7 @@ function trashIconDelete (iconDelete) {  //fonction pour permettre d'effacer les
   })
 }
 
-function addFigures(photos, modalAdds) {
+function addFigures(photos, modalAdds) { //fonction pour ajouter les images
   const newFigure = document.createElement("figure"); //créé les figures dans le DOM
   newFigure.setAttribute("data-category", photos.categoryId);
   newFigure.setAttribute("data-id", photos.id);
@@ -31,9 +31,9 @@ function addFigures(photos, modalAdds) {
   const imageFigure = document.createElement("img");
   imageFigure.src = photos.imageUrl;
   imageFigure.alt = photos.title;
-  imageFigure.crossOrigin = "anonymous"; //afin de voir les images car l'origin n'était pas la même source
+  imageFigure.crossOrigin = "anonymous"; //afin de voir les images sur le site 
 
-  const captionFigure = document.createElement("figcaption"); //création dans HTML qui va impacter sur le CSS existant
+  const captionFigure = document.createElement("figcaption"); //création dans HTML
 
   const iconDelete = document.createElement("img");
   iconDelete.src = "assets/icons/trash-icon.png";
@@ -75,12 +75,12 @@ fetch("http://localhost:5678/api/works") //appelle aux travaux présents dans l'
     setCategories.add(JSON.stringify({id: 0, name: "Tous"})); //ajoute la catégorie de tags "Tous" au DOM
 
     for (let photos of listPictures) {
-      websitePictures.appendChild(addFigures(photos, false)); //appel à la fonction qui comprend tout ce qui est dans la définition de la fonction, va exécuter ce qu'il y a dedans
+      websitePictures.appendChild(addFigures(photos, false));
       setCategories.add(JSON.stringify({id: photos.categoryId, name: photos.category.name}));
       modalPictures.appendChild(addFigures(photos, true));
     }
 
-    for (let category of setCategories) { //dans une boucle, on recrée toujours une variable car elle n'existe que dans celle-ci
+    for (let category of setCategories) {
       const newCategory = document.createElement("li");
       const newTag = document.createElement("a");
       newTag.innerText = JSON.parse(category).name;
@@ -93,7 +93,7 @@ fetch("http://localhost:5678/api/works") //appelle aux travaux présents dans l'
         document
           .querySelectorAll("figure[data-category]")
           .forEach((figure) => {
-            const hasNotCategory = !figure.dataset.category.includes(JSON.parse(category).id); //parse = analyse objets dans JSON
+            const hasNotCategory = !figure.dataset.category.includes(JSON.parse(category).id);
             figure.className = "";
 
             if (JSON.parse(category).name !== "Tous" && hasNotCategory) {
@@ -115,7 +115,7 @@ const modificationsInPage = document.getElementsByClassName("add-modifications")
 if (userConnected !== null) {
   logInHidden[0].innerText = "logout";
   modalOptions.style.display = "flex"; //l'option de la modale apparaît seulement quand l'utilisateur est connecté
-  for (modifs of modificationsInPage){   // pour que les boutons "modifier" n'apparaissent qu'une fois connecté
+  for (modifs of modificationsInPage){   //pour que les boutons "modifier" n'apparaissent qu'une fois connecté
     modifs.style.display = "flex";
   }
 }

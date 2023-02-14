@@ -50,7 +50,7 @@ table {
 /** end reset css**/
 body {
   max-width: 1140px;
-  margin: auto;
+  margin-inline: 15%;
   font-family: "Work Sans";
   font-size: 14px;
 }
@@ -291,11 +291,12 @@ footer nav ul {
   justify-content: center;
   align-items: center;
   padding: 10px 0;
-  margin: 0;
-  margin-left: 0em;
+  margin-block: 0;
+  margin-inline: -30%;
+  width: 151.4%;
 }
 
-#changings {
+#publish-changings {
   background-color: white;
   color: black;
   font-weight: bold;
@@ -307,12 +308,16 @@ footer nav ul {
   cursor: pointer;
 }
 
-#changings:hover {
+#publish-changings:hover {
   background-color: black;
   color: white;
   border: 1px solid white;
   border-radius: 25px;
   padding: 12px;
+}
+
+#changings:hover{
+  font-weight: bold;
 }
 
 .modal {
